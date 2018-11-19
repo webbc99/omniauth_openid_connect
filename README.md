@@ -4,6 +4,10 @@ Originally was [omniauth-openid-connect](https://github.com/jjbohn/omniauth-open
 
 I've forked this repository and launch as separate gem because maintaining of original was dropped.
 
+## Change
+
+In the callback initialisation phase, the response_mode specified in the config for openid_connect was not being merged in. This was required for our custom OAuth-OpenIDConnect platform.
+
 ## Installation
 
 Add this line to your application's Gemfile:
