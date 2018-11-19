@@ -119,6 +119,7 @@ module OmniAuth
         client.redirect_uri = redirect_uri
         opts = {
           response_type: options.response_type,
+          response_mode: options.response_mode,
           scope: options.scope,
           state: new_state,
           login_hint: options.login_hint,
