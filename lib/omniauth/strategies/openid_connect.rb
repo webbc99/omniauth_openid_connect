@@ -105,6 +105,8 @@ module OmniAuth
         end
       rescue CallbackError => e
         fail!(:invalid_credentials, e)
+      rescue CallbackError => e
+        fail!(:login_required, e)
       rescue ::Timeout::Error, ::Errno::ETIMEDOUT => e
         fail!(:timeout, e)
       rescue ::SocketError => e
