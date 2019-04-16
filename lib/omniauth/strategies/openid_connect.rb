@@ -104,7 +104,6 @@ module OmniAuth
           super
         end
       rescue CallbackError => e
-        dlog e
         puts e
         fail!(:login_required, e)
         fail!(:invalid_credentials, e)
