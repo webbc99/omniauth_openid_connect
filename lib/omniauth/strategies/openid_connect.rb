@@ -90,7 +90,7 @@ module OmniAuth
       def callback_phase
         error = request.params['error_reason'] || request.params['error']
         if error
-          redirect_to "http://#{ConfSystem.default_host}#{ENV['RAILS_RELATIVE_URL_ROOT']}/auth/openid_connect"
+          redirect "http://#{ConfSystem.default_host}#{ENV['RAILS_RELATIVE_URL_ROOT']}/auth/openid_connect"
         elsif request.params['state'].to_s.empty? || request.params['state'] != stored_state
           return Rack::Response.new(['401 Unauthorized'], 401).finish
         elsif !request.params['code']
