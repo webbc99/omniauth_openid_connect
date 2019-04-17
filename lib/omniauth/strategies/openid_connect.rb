@@ -90,6 +90,7 @@ module OmniAuth
       def callback_phase
         error = request.params['error_reason'] || request.params['error']
         if error
+          cookies.permanent[:login_required] = true
           redirect "http://#{ConfSystem.default_host}#{ENV['RAILS_RELATIVE_URL_ROOT']}/session/new"
         elsif request.params['state'].to_s.empty? || request.params['state'] != stored_state
           return Rack::Response.new(['401 Unauthorized'], 401).finish
