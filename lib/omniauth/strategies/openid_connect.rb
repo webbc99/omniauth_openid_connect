@@ -90,7 +90,7 @@ module OmniAuth
       def callback_phase
         error = request.params['error_reason'] || request.params['error']
         if error
-          raise CallbackError.new(request.params['error'], request.params['error_description'] || request.params['error_reason'], request.params['error_uri'])
+          return error
         elsif request.params['state'].to_s.empty? || request.params['state'] != stored_state
           return Rack::Response.new(['401 Unauthorized'], 401).finish
         elsif !request.params['code']
@@ -104,7 +104,7 @@ module OmniAuth
           super
         end
       rescue CallbackError => e
-        puts e
+        fail!(:invalid_credentials, e)
       rescue ::Timeout::Error, ::Errno::ETIMEDOUT => e
         fail!(:timeout, e)
       rescue ::SocketError => e
